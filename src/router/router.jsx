@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import BookShelf from "../pages/Bookshelf/BookShelf";
 import Register from "../pages/Register/Register";
 import LogIn from "../pages/LogInPage/LogIn";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
             },
         ]
     },
+
+    {
+        path:'/*',
+        Component: ErrorPage,
+    }
 ]);
 
 export default router;
