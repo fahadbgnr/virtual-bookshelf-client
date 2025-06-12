@@ -21,6 +21,9 @@ const NavBar = () => {
     const links = <>
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to="/bookShelf" >Bookshelf </NavLink></li>
+        <li><NavLink to="/addBook" >Add Book </NavLink></li>
+        <li><NavLink to="/myBook" >My Book </NavLink></li>
+        <li><NavLink to="/myProfile" >My Profile </NavLink></li>
         {/* for applicant links. check roles as well */}
         {/* {
             user && <>

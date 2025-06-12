@@ -7,6 +7,12 @@ import BookShelf from "../pages/Bookshelf/BookShelf";
 import Register from "../pages/Register/Register";
 import LogIn from "../pages/LogInPage/LogIn";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import BookDetails from "../pages/Bookshelf/BookDetails";
+import AddBook from "../pages/AddBooks/AddBook";
+import UpDateBook from "../pages/AddBooks/UpDateBook";
+import MyBooks from "../pages/Profile/MyBooks";
+import MyProfile from "../pages/Profile/MyProfile";
+import PrivateRoute from "../routes/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +28,37 @@ const router = createBrowserRouter([
                 Component: BookShelf,
             },
             {
+                path: 'bookDetails/:id',
+                Component: BookDetails,
+
+            },
+            {
+                path: 'addBook',
+                element: <PrivateRoute>
+                    <AddBook></AddBook>
+                </PrivateRoute>
+            },
+            {
+                path: 'upDateBook/:id',
+                element: <PrivateRoute>
+                    <UpDateBook></UpDateBook>
+                </PrivateRoute>
+            },
+            {
+                path: 'myBook',
+                element: <PrivateRoute>
+                    <MyBooks></MyBooks>
+                </PrivateRoute>
+            },
+            {
+                path: 'myProfile',
+                element: <PrivateRoute>
+                    <MyProfile></MyProfile>
+                </PrivateRoute>
+            },
+
+
+            {
                 path: '/register',
                 Component: Register,
             },
@@ -33,7 +70,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path:'/*',
+        path: '/*',
         Component: ErrorPage,
     }
 ]);
