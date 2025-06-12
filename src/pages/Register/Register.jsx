@@ -1,18 +1,47 @@
-import React from 'react';
+import Lottie from 'lottie-react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import registerLottie from '../../assets/lotties/Register.json';
+import { AuthContext } from '../../contexts/AuthContext/AuthContext';
+import SocialLogIn from '../Shared/SocialLogIn';
 
 const Register = () => {
+
+    const { createUser } = use(AuthContext);
+
+
+    const handleRegister = e => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
+        console.log(email, password, restFormData)
+
+        // create User
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+
+    }
     return (
-        <div className="max-w-md mx-auto p-6 bg-base-100 shadow-xl rounded-2xl mt-10 my-10">
-            <h2 className="text-2xl font-bold mb-4 text-center">SignUp</h2>
-            <form className="space-y-4">
+        <div className=" max-w-md mx-auto p-6 bg-base-100 shadow-xl rounded-2xl mt-10 my-10">
+            <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
+            <div className='my-2'>
+                <Lottie animationData={registerLottie} loop={true}></Lottie>
+            </div>
+            <form onSubmit={handleRegister} className="space-y-4">
                 <input
                     name="name"
                     type="text"
                     placeholder="Name"
                     // value={user?.name}
                     className="input input-bordered w-full"
-                    readOnly
+                    // readOnly
 
                     required />
 
@@ -22,7 +51,7 @@ const Register = () => {
                     // value={user?.email}
                     placeholder="Email"
                     className="input input-bordered w-full"
-                    readOnly
+                    // readOnly
                     required />
 
                 <input
@@ -52,9 +81,9 @@ const Register = () => {
                 <Link to="/logIn" className="text-blue-600 underline">LogIn</Link>
             </p>
 
-            <div className="divider">OR</div>
-            <button  className="btn btn-outline btn-success w-full">
-                Continue with Google
+
+            <button className=" w-full">
+                <SocialLogIn></SocialLogIn>
             </button>
         </div >
     );
