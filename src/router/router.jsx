@@ -25,10 +25,12 @@ const router = createBrowserRouter([
             },
             {
                 path: 'bookShelf',
+                loader: ()=> fetch('http://localhost:3000/books'),
                 Component: BookShelf,
             },
             {
                 path: 'bookDetails/:id',
+                loader: ({params})=> fetch(`http://localhost:3000/books/${params.id}`),
                 Component: BookDetails,
 
             },
