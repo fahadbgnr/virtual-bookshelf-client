@@ -2,22 +2,33 @@ import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import Logo from '../../assets/Logo.png';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 const NavBar = () => {
-    const { user, logOutUser } = use(AuthContext);
+    const { user, logOutUser, setUser } = use(AuthContext);
 
     const handleLogOut = () => {
-        logOutUser()
-            .then(() => {
-                console.log('LogOut successfully')
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
-
-
-    }
+        Swal.fire({
+            title: "Are you sure you want to log out?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, log out"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                import('firebase/auth').then(({ getAuth, signOut }) => {
+                    const auth = getAuth();
+                    signOut(auth).then(() => {
+                        setUser(null);
+                        Swal.fire("Logged Out!", "", "success");
+                    }).catch((error) => {
+                        console.error("Logout error:", error);
+                         logOutUser();
+                    });
+                });
+            }
+        
+        });
+    };
     const links = <>
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to="/bookShelf" >Bookshelf </NavLink></li>

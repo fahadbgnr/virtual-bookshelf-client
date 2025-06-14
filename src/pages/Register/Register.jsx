@@ -1,13 +1,17 @@
 import Lottie from 'lottie-react';
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import registerLottie from '../../assets/lotties/Register.json';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import SocialLogIn from '../Shared/SocialLogIn';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
     const { createUser } = use(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state || "/";
 
 
     const handleRegister = e => {
@@ -15,16 +19,45 @@ const Register = () => {
         const form = e.target;
         const formData = new FormData(form);
         const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
-        console.log(email, password, restFormData)
 
         // create User
         createUser(email, password)
-            .then(result => {
+            .then((result => {
                 console.log(result.user)
-            })
+
+                const newUser = {
+                    email,
+                    ...restFormData,
+                    creationTime: result.user?.metadata?.creationTime,
+                    lastSignInTime: result.user?.metadata?.lastSignInTime
+                }
+
+
+                fetch('http://localhost:3000/users', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+
+                    body: JSON.stringify(newUser)
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                title: "Your Account is Created.",
+                                icon: "success",
+                                draggable: true
+
+                            });
+
+                        }
+                    })
+            }))
             .catch(error => {
                 console.log(error)
             })
+        navigate(from, { replace: true });
 
 
     }

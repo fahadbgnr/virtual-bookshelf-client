@@ -13,6 +13,7 @@ import UpDateBook from "../pages/AddBooks/UpDateBook";
 import MyBooks from "../pages/Profile/MyBooks";
 import MyProfile from "../pages/Profile/MyProfile";
 import PrivateRoute from "../routes/PrivateRoute";
+import Loder from "../pages/LoadingPage/Loder";
 
 const router = createBrowserRouter([
     {
@@ -27,11 +28,13 @@ const router = createBrowserRouter([
                 path: 'bookShelf',
                 loader: ()=> fetch('http://localhost:3000/books'),
                 Component: BookShelf,
+                hydrateFallbackElement: <Loder></Loder>
             },
             {
                 path: 'bookDetails/:id',
                 loader: ({params})=> fetch(`http://localhost:3000/books/${params.id}`),
                 Component: BookDetails,
+                hydrateFallbackElement: <Loder></Loder>
 
             },
             {
@@ -44,7 +47,8 @@ const router = createBrowserRouter([
                 path: 'upDateBook/:id',
                 element: <PrivateRoute>
                     <UpDateBook></UpDateBook>
-                </PrivateRoute>
+                </PrivateRoute>,
+                hydrateFallbackElement: <Loder></Loder>
             },
             {
                 path: 'myBook',

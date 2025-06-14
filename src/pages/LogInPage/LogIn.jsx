@@ -1,12 +1,17 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import logInLottie from '../../assets/lotties/LogIn.json';
 import Lottie from 'lottie-react';
 import SocialLogIn from '../Shared/SocialLogIn';
+import Swal from 'sweetalert2';
 
 const LogIn = () => {
     const { logInUser } = use(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state;
+    console.log(from);
 
 
     const handleLogIn = e => {
@@ -18,12 +23,14 @@ const LogIn = () => {
 
         // Login User
         logInUser(email, password)
-            .then(result => {
-                console.log(result.user)
+            .then(() => {
+                Swal.fire("Success", "Login successful", "success");
+                navigate(from, { replace: true });
+
             })
-            .catch(error => {
-                console.log(error)
-            })
+            .catch((error) => {
+                Swal.fire("Error", error.message, "error");
+            });
 
 
     }
