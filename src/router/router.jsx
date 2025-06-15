@@ -28,13 +28,13 @@ const router = createBrowserRouter([
             },
             {
                 path: 'bookShelf',
-                loader: ()=> fetch('http://localhost:3000/books'),
+                loader: () => fetch('http://localhost:3000/books'),
                 Component: BookShelf,
                 hydrateFallbackElement: <Loder></Loder>
             },
             {
                 path: 'bookDetails/:id',
-                loader: ({params})=> fetch(`http://localhost:3000/books/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
                 Component: BookDetails,
                 hydrateFallbackElement: <Loder></Loder>
 
@@ -57,12 +57,15 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyBooks></MyBooks>
                 </PrivateRoute>
+                
+                
             },
             {
                 path: 'myProfile',
                 element: <PrivateRoute>
                     <MyProfile></MyProfile>
                 </PrivateRoute>
+                
             },
 
 
@@ -79,6 +82,7 @@ const router = createBrowserRouter([
     {
         path: 'category/:categoryName',
         Component: Category,
+        hydrateFallbackElement: <Loder></Loder>
 
     },
 

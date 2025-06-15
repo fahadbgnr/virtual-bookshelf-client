@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const BookDetails = () => {
     const {
@@ -125,6 +126,9 @@ const BookDetails = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-4">
+            <Helmet>
+                <title>BookNest||BookDetails</title>
+            </Helmet>
             <div className="grid md:grid-cols-2 gap-6">
                 <img src={coverPhotoUrl} alt={bookTitle} className="w-full rounded" />
                 <div>

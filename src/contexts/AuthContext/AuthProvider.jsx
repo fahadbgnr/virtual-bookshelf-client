@@ -8,31 +8,31 @@ import { auth } from '../../firebase/firebase.init';
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [user, setUser]= useState(null);
 
     const createUser = (email, password)=>{
-        // setLoading(true)
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
 
     }
     const logInUser = (email, password)=>{
-        // setLoading(true)
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
      const logInWithGoogle =()=>{
-        // setLoading(true);
+        setLoading(true);
         return signInWithPopup(auth, googleProvider)
     }
     const logOutUser = ()=>{
-        // setLoading(true)
+        setLoading(true)
         return signOut(auth)
     }
 
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser)
-            // setLoading(false)
+            setLoading(false)
             console.log('user in the auth state change', currentUser)
 
         })
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 
 
     const authInfo = {
-        // loading,
+        loading,
         user,
         createUser,
         logInUser,

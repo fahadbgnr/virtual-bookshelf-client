@@ -1,22 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router';
 
 const Category = () => {
     const { categoryName } = useParams();
-  const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState([]);
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/books`)
-      .then(res => {
-        const filtered = res.data.filter(
-          book => book.bookCategory === categoryName
-        );
-        setBooks(filtered);
-      });
-  }, [categoryName]);
+    useEffect(() => {
+        axios.get(`http://localhost:3000/books`)
+            .then(res => {
+                const filtered = res.data.filter(
+                    book => book.bookCategory === categoryName
+                );
+                setBooks(filtered);
+            });
+    }, [categoryName]);
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
+            <Helmet>
+                <title>BookNest||Category</title>
+            </Helmet>
             <h2 className="text-3xl font-bold mb-6">📚 {categoryName} Books</h2>
             {books.length === 0 ? (
                 <p>No books found in this category.</p>

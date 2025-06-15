@@ -3,6 +3,7 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 
 const MyBooks = () => {
     const { user } = use(AuthContext);
@@ -48,6 +49,9 @@ const MyBooks = () => {
             transition={{ duration: 0.5 }}
         >
             <h2 className="text-xl font-semibold mb-4 text-center">My Added Books</h2>
+            <Helmet>
+                <title>BookNest||MyBooks</title>
+            </Helmet>
             <motion.table
                 className="w-full border border-gray-300 text-sm md:text-base"
                 initial={{ opacity: 0 }}

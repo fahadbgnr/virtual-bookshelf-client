@@ -2,38 +2,42 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
+import { div } from 'framer-motion/client';
+import { Helmet } from 'react-helmet';
 
 
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7f50', '#a4de6c'];
 const MyProfile = () => {
-     const { user } = useContext(AuthContext);
-  const [books, setBooks] = useState([]);
+    const { user } = useContext(AuthContext);
+    const [books, setBooks] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/my-books?email=${user?.email}`)
-      .then(res => res.json())
-      .then(data => setBooks(data));
-  }, [user]);
+    useEffect(() => {
+        fetch(`http://localhost:3000/my-books?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setBooks(data));
+    }, [user]);
 
-  const totalBooks = books.length;
+    const totalBooks = books.length;
 
-  const categoryData = books.reduce((acc, book) => {
-    const category = book.bookCategory;
-    acc[category] = (acc[category] || 0) + 1;
-    return acc;
-  }, {});
+    const categoryData = books.reduce((acc, book) => {
+        const category = book.bookCategory;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+    }, {});
 
-  const chartData = Object.keys(categoryData).map(key => ({
-    name: key,
-    value: categoryData[key],
-  }));
+    const chartData = Object.keys(categoryData).map(key => ({
+        name: key,
+        value: categoryData[key],
+    }));
     return (
         <motion.div
+
             className="w-full max-w-7xl px-4 mx-auto my-10"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+
         >
             <motion.h2
                 className="text-2xl font-bold mb-6 text-center"
@@ -51,6 +55,9 @@ const MyProfile = () => {
                 transition={{ delay: 0.4 }}
             >
                 <div className="text-center w-full max-w-sm">
+                    <Helmet>
+                        <title>BookNest||MyProfile</title>
+                    </Helmet>
                     <img
                         src={user?.photoURL}
                         alt="Profile"

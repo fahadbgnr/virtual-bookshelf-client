@@ -5,6 +5,7 @@ import logInLottie from '../../assets/lotties/LogIn.json';
 import Lottie from 'lottie-react';
 import SocialLogIn from '../Shared/SocialLogIn';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const LogIn = () => {
     const { logInUser } = use(AuthContext);
@@ -36,6 +37,9 @@ const LogIn = () => {
     }
     return (
         <div className='my-10'>
+            <Helmet>
+                <title>BookNest||Login</title>
+            </Helmet>
             <div className="max-w-md mx-auto p-6 bg-base-100 shadow-xl rounded-2xl mt-10">
                 <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
                 <Lottie animationData={logInLottie} loop={true}></Lottie>

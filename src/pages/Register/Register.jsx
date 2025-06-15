@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import SocialLogIn from '../Shared/SocialLogIn';
 import Swal from 'sweetalert2';
 import { updateProfile } from "firebase/auth";
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
 
@@ -70,6 +71,9 @@ const Register = () => {
     }
     return (
         <div className=" max-w-md mx-auto p-6 bg-base-100 shadow-xl rounded-2xl mt-10 my-10">
+            <Helmet>
+                    <title>BookNest||Register</title>
+                  </Helmet>
             <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
             <div className='my-2'>
                 <Lottie animationData={registerLottie} loop={true}></Lottie>

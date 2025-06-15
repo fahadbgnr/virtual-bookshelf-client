@@ -3,10 +3,11 @@ import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 const AddBook = () => {
-     const navigate = useNavigate();
-   const { user } = use(AuthContext);
+    const navigate = useNavigate();
+    const { user } = use(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,7 +17,7 @@ const AddBook = () => {
         const newBook = Object.fromEntries(formData.entries());
         console.log(newBook)
 
-         newBook.upvote = Number(newBook.upvote) || 0;
+        newBook.upvote = Number(newBook.upvote) || 0;
 
         newBook.email = user?.email || '';
         newBook.name = user?.displayName || '';
@@ -40,14 +41,14 @@ const AddBook = () => {
         })
             .then(res => res.json())
             .then(data => {
-               if (data.insertedId) {
+                if (data.insertedId) {
                     Swal.fire({
                         title: "New Book added successfully.",
                         icon: "success",
                         confirmButtonColor: "#3085d6"
                     });
-                    form.reset(); 
-                     navigate('/myBook');
+                    form.reset();
+                    navigate('/myBook');
                 }
             })
             .catch((error) => {
@@ -66,6 +67,9 @@ const AddBook = () => {
             transition={{ duration: 0.6 }}
         >
             <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600">📘 Add a New Book</h2>
+            <Helmet>
+                <title>BookNest||AddBook</title>
+            </Helmet>
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Book Title */}
@@ -95,13 +99,13 @@ const AddBook = () => {
                 {/* Email */}
                 <div>
                     <label className="label font-semibold">User Email</label>
-                    <input type="email"    value={user?.email || ''} name="email" readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
+                    <input type="email" value={user?.email || ''} name="email" readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
                 </div>
 
                 {/* Name */}
                 <div>
                     <label className="label font-semibold">User Name</label>
-                    <input type="text"  value={user?.displayName || ''} name="name" readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
+                    <input type="text" value={user?.displayName || ''} name="name" readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
                 </div>
 
                 {/* Category */}
@@ -141,8 +145,8 @@ const AddBook = () => {
                 {/* Submit */}
                 <div className="md:col-span-2">
                     <button
-                    type="submit"
-                    className="btn btn-primary w-full">Submit Book</button>
+                        type="submit"
+                        className="btn btn-primary w-full">Submit Book</button>
                 </div>
             </form>
         </motion.div>

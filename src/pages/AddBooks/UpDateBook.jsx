@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 
 const UpDateBook = () => {
     const { id } = useParams();
@@ -61,6 +62,9 @@ const UpDateBook = () => {
             transition={{ duration: 0.6 }}
         >
             <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600">📘 Add a New Book</h2>
+            <Helmet>
+                <title>BookNest||UpDateBook</title>
+            </Helmet>
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
