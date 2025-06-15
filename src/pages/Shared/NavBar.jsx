@@ -22,36 +22,64 @@ const NavBar = () => {
                         Swal.fire("Logged Out!", "", "success");
                     }).catch((error) => {
                         console.error("Logout error:", error);
-                         logOutUser();
+                        logOutUser();
                     });
                 });
             }
-        
+
         });
     };
     const links = <>
-        <li><NavLink to="/" >Home</NavLink></li>
-        <li><NavLink to="/bookShelf" >Bookshelf </NavLink></li>
-        <li><NavLink to="/addBook" >Add Book </NavLink></li>
-        <li><NavLink to="/myBook" >My Book </NavLink></li>
-        <li><NavLink to="/myProfile" >My Profile </NavLink></li>
-        {/* for applicant links. check roles as well */}
-        {/* {
-            user && <>
-
-                <li><NavLink to="/myApplications" >My Applications</NavLink></li>
-            </>
-        } */}
-
-        {/* for recruiter. check roles as well */}
-        {/* {
-            user && <>
-
-                <li><NavLink to="/addJob" >Add Job</NavLink></li>
-                <li><NavLink to="/myPostedJobs" >My Posted Jobs</NavLink></li>
-
-            </>
-        } */}
+        <li>
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    isActive ? 'text-purple-600 font-semibold underline' : 'hover:text-purple-500'
+                }
+            >
+                Home
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/bookShelf"
+                className={({ isActive }) =>
+                    isActive ? 'text-purple-600 font-semibold underline' : 'hover:text-purple-500'
+                }
+            >
+                Bookshelf
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/addBook"
+                className={({ isActive }) =>
+                    isActive ? 'text-purple-600 font-semibold underline' : 'hover:text-purple-500'
+                }
+            >
+                Add Book
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/myBook"
+                className={({ isActive }) =>
+                    isActive ? 'text-purple-600 font-semibold underline' : 'hover:text-purple-500'
+                }
+            >
+                My Book
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/myProfile"
+                className={({ isActive }) =>
+                    isActive ? 'text-purple-600 font-semibold underline' : 'hover:text-purple-500'
+                }
+            >
+                My Profile
+            </NavLink>
+        </li>
 
 
     </>
