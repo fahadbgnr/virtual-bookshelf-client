@@ -69,7 +69,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <img className='w-8 lg:w-16 md:w-10 ' src={Logo} alt="" />
-                <a className=" lg:text-xl mx-3">Virtual Bookshelf</a>
+                <a className=" lg:text-xl mx-3">BookNest</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

@@ -3,22 +3,33 @@ import Logo from '../../assets/Logo.png'
 
 const Footer = () => {
     return (
-        <div className='w-11/12 mx-auto'>
-            <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
+        <div className='w-11/12 mx-auto my-5'>
+            <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
                 <aside>
-                    <img className='w-16 lg:w-25' src={Logo} alt="" />
-                    <p className='lg:text-2xl'>
-                        Virtual Bookshelf
+                    <img className='w-10' src={Logo} alt="" />
+                    <p>
+                        BookNest
+                        <br />
+                        Where stories find a home.
                     </p>
                 </aside>
                 <nav>
-                    <nav className="grid grid-cols-2 gap-4">
-                        <a className="link link-hover">Contact Details</a>
-                        <a className="link link-hover">Terms & Conditions</a>
-                    </nav>
+                    <h6 className="footer-title"> Contact details</h6>
+                    <p>New Street City<br /> DOH Country</p>
+                    <p>Email: info@booknest.com <br /> Phone: +1(123) 456-7890</p>
+
                 </nav>
                 <nav>
-                    <div className="grid grid-cols-3 gap-4">
+                    <h6 className="footer-title"> Quick Links</h6>
+                    <a className="link link-hover">Terms & Conditions</a>
+                    <a className="link link-hover">Privacy policy </a>
+                    <a className="link link-hover"> About us</a>
+
+
+                </nav>
+                <nav>
+                    <h6 className="footer-title">Social</h6>
+                    <div className="grid grid-flow-col gap-4">
                         <a>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +65,8 @@ const Footer = () => {
                         </a>
                     </div>
                 </nav>
+            </footer>
+            <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 ">
                 <aside>
                     <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
                 </aside>
