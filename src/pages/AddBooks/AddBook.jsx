@@ -16,6 +16,8 @@ const AddBook = () => {
         const newBook = Object.fromEntries(formData.entries());
         console.log(newBook)
 
+         newBook.upvote = Number(newBook.upvote) || 0;
+
         newBook.email = user?.email || '';
         newBook.name = user?.displayName || '';
 

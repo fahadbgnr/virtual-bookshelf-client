@@ -5,6 +5,7 @@ import registerLottie from '../../assets/lotties/Register.json';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import SocialLogIn from '../Shared/SocialLogIn';
 import Swal from 'sweetalert2';
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
 
@@ -18,46 +19,52 @@ const Register = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
+         const { name, email, password, photoURL } = Object.fromEntries(formData.entries());
 
         // create User
         createUser(email, password)
-            .then((result => {
-                console.log(result.user)
+            .then(result => {
+                const user = result.user;
 
-                const newUser = {
-                    email,
-                    ...restFormData,
-                    creationTime: result.user?.metadata?.creationTime,
-                    lastSignInTime: result.user?.metadata?.lastSignInTime
-                }
+                // update displayName and photoURL
+                updateProfile(user, {
+                    displayName: name,
+                    photoURL: photoURL
+                }).then(() => {
+                    // create user object for your backend
+                    const newUser = {
+                        email,
+                        name,
+                        photoURL,
+                        creationTime: user.metadata.creationTime,
+                        lastSignInTime: user.metadata.lastSignInTime
+                    };
 
-
-                fetch('http://localhost:3000/users', {
-                    method: "POST",
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-
-                    body: JSON.stringify(newUser)
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.insertedId) {
-                            Swal.fire({
-                                title: "Your Account is Created.",
-                                icon: "success",
-                                draggable: true
-
-                            });
-
-                        }
+                    fetch('http://localhost:3000/users', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newUser)
                     })
-            }))
-            .catch(error => {
-                console.log(error)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    title: "Your Account is Created.",
+                                    icon: "success",
+                                    draggable: true
+                                });
+                                navigate(from, { replace: true });
+                            }
+                        });
+                }).catch(error => {
+                    console.error("Profile update failed:", error);
+                });
             })
-        navigate(from, { replace: true });
+            .catch(error => {
+                console.log(error);
+            });
 
 
     }
@@ -72,19 +79,19 @@ const Register = () => {
                     name="name"
                     type="text"
                     placeholder="Name"
-                    // value={user?.name}
+                    
                     className="input input-bordered w-full"
-                    // readOnly
+                   
 
                     required />
 
                 <input
                     name="email"
                     type="email"
-                    // value={user?.email}
+                    
                     placeholder="Email"
                     className="input input-bordered w-full"
-                    // readOnly
+                   
                     required />
 
                 <input

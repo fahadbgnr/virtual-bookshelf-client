@@ -14,6 +14,8 @@ import MyBooks from "../pages/Profile/MyBooks";
 import MyProfile from "../pages/Profile/MyProfile";
 import PrivateRoute from "../routes/PrivateRoute";
 import Loder from "../pages/LoadingPage/Loder";
+import Category from "../pages/Home/Category/Category";
+
 
 const router = createBrowserRouter([
     {
@@ -73,6 +75,11 @@ const router = createBrowserRouter([
                 Component: LogIn,
             },
         ]
+    },
+    {
+        path: 'category/:categoryName',
+        Component: Category,
+
     },
 
     {

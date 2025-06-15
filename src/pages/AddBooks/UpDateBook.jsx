@@ -34,22 +34,25 @@ const UpDateBook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const { _id, ...updatedBookData } = upDateBook;
+
         fetch(`http://localhost:3000/books/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(upDateBook),
+            body: JSON.stringify(updatedBookData),
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.modifiedCount > 0) {
+                if (data) {
                     Swal.fire('Success', 'Book updated successfully', 'success');
                     navigate('/myBook');
                 }
             });
-
     };
+
     return (
         <motion.div
             className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-10"
@@ -60,7 +63,6 @@ const UpDateBook = () => {
             <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600">📘 Add a New Book</h2>
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Book Title */}
                 <div>
                     <label className="label font-semibold">Book Title</label>
                     <input
@@ -70,10 +72,9 @@ const UpDateBook = () => {
                         value={upDateBook.bookTitle}
                         placeholder="Book Title"
                         name="bookTitle"
-                         required/>
+                        required />
                 </div>
 
-                {/* Cover Photo */}
                 <div>
                     <label className="label font-semibold">Cover Photo URL</label>
                     <input
@@ -83,10 +84,9 @@ const UpDateBook = () => {
                         onChange={handleChange}
                         value={upDateBook.coverPhotoUrl}
                         name="coverPhotoUrl"
-                        required/>
+                        required />
                 </div>
 
-                {/* Total Pages */}
                 <div>
                     <label className="label font-semibold">Total Pages</label>
                     <input
@@ -96,10 +96,9 @@ const UpDateBook = () => {
                         onChange={handleChange}
                         value={upDateBook.totalPage}
                         name="totalPage"
-                         required/>
+                        required />
                 </div>
 
-                {/* Author Name */}
                 <div>
                     <label className="label font-semibold">Author Name</label>
                     <input
@@ -112,26 +111,26 @@ const UpDateBook = () => {
                         required />
                 </div>
 
-                {/* Email */}
                 <div>
                     <label className="label font-semibold">User Email</label>
                     <input
                         type="email"
                         value={user?.email || ''}
-                        name="email" readOnly
+                        name="email"
+                        readOnly
                         className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
                 </div>
 
-                {/* Name */}
                 <div>
                     <label className="label font-semibold">User Name</label>
                     <input
                         type="text"
                         value={user?.displayName || ''}
-                        name="name" readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
+                        name="name"
+                        readOnly
+                        className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
                 </div>
 
-                {/* Category */}
                 <div>
                     <label className="label font-semibold">Book Category</label>
                     <select
@@ -147,7 +146,6 @@ const UpDateBook = () => {
                     </select>
                 </div>
 
-                {/* Reading Status */}
                 <div>
                     <label className="label font-semibold">Reading Status</label>
                     <select
@@ -163,7 +161,6 @@ const UpDateBook = () => {
                     </select>
                 </div>
 
-                {/* Overview */}
                 <div className="md:col-span-2">
                     <label className="label font-semibold">Book Overview</label>
                     <textarea
@@ -176,17 +173,16 @@ const UpDateBook = () => {
                         required />
                 </div>
 
-                {/* Upvote */}
                 <div>
                     <label className="label font-semibold">Upvote</label>
                     <input
                         type="number"
-                        value={0} readOnly
+                        value={0}
+                        readOnly
                         name="upvote"
                         className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
                 </div>
 
-                {/* Update */}
                 <div className="md:col-span-2">
                     <button
                         type="submit"
