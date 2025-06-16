@@ -38,20 +38,34 @@ const UpDateBook = () => {
 
         const { _id, ...updatedBookData } = upDateBook;
 
-        fetch(`http://localhost:3000/books/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedBookData),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data) {
-                    Swal.fire('Success', 'Book updated successfully', 'success');
-                    navigate('/myBook');
-                }
+        // Include user's email and name
+        updatedBookData.email = user?.email || '';
+        updatedBookData.name = user?.displayName || '';
+
+        try {
+            const accessToken = await user.getIdToken();
+
+            const res = await fetch(`http://localhost:3000/books/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(updatedBookData),
             });
+
+            const data = await res.json();
+
+            if (data.success) {
+                Swal.fire('Success', 'Book updated successfully!', 'success');
+                navigate('/myBook');
+            } else {
+                Swal.fire('No Change', 'No updates were made to the book.', 'info');
+            }
+
+        } catch (error) {
+            Swal.fire('Error', error.message, 'error');
+        }
     };
 
     return (

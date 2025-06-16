@@ -9,56 +9,56 @@ const AddBook = () => {
     const navigate = useNavigate();
     const { user } = use(AuthContext);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+   const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        const form = e.target;
-        const formData = new FormData(form);
-        const newBook = Object.fromEntries(formData.entries());
-        console.log(newBook)
+    const form = e.target;
+    const formData = new FormData(form);
+    const newBook = Object.fromEntries(formData.entries());
 
-        newBook.upvote = Number(newBook.upvote) || 0;
+    newBook.upvote = Number(newBook.upvote) || 0;
+    newBook.email = user?.email || '';
+    newBook.name = user?.displayName || '';
 
-        newBook.email = user?.email || '';
-        newBook.name = user?.displayName || '';
+    if (!newBook.email || !newBook.name) {
+        return Swal.fire({
+            title: "User information missing",
+            text: "Please login to add a task",
+            icon: "error"
+        });
+    }
 
-        if (!newBook.email || !newBook.name) {
-            return Swal.fire({
-                title: "User information missing",
-                text: "Please login to add a task",
-                icon: "error"
-            });
-        }
+    try {
+        const accessToken = await user.getIdToken(); //  Get Firebase JWT
 
-
-
-        // send books data to the db
-        fetch('http://localhost:3000/books', {
+        const res = await fetch('http://localhost:3000/books', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newBook),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}` //  Attach token
+            },
+            body: JSON.stringify(newBook)
+        });
 
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    Swal.fire({
-                        title: "New Book added successfully.",
-                        icon: "success",
-                        confirmButtonColor: "#3085d6"
-                    });
-                    form.reset();
-                    navigate('/myBook');
-                }
-            })
-            .catch((error) => {
-                Swal.fire({
-                    title: "Something went wrong!",
-                    text: error.message,
-                    icon: "error"
-                });
-            })
-    };
+        const data = await res.json();
+
+        if (data.insertedId) {
+            Swal.fire({
+                title: "New Book added successfully.",
+                icon: "success",
+                confirmButtonColor: "#3085d6"
+            });
+            form.reset();
+            navigate('/myBook');
+        }
+    } catch (error) {
+        Swal.fire({
+            title: "Something went wrong!",
+            text: error.message,
+            icon: "error"
+        });
+    }
+};
     return (
         <motion.div
             className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-10"

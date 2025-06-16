@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
-import { div } from 'framer-motion/client';
 import { Helmet } from 'react-helmet';
+import { getAuth } from 'firebase/auth';
 
 
 
@@ -13,10 +13,34 @@ const MyProfile = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/my-books?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setBooks(data));
+        const fetchUserBooks = async () => {
+            try {
+                const auth = getAuth();
+                const currentUser = auth.currentUser;
+
+                if (!currentUser) return;
+
+                const accessToken = await currentUser.getIdToken();
+
+                const res = await fetch(`http://localhost:3000/my-books?email=${user?.email}`, {
+                    headers: {
+                        authorization: `Bearer ${accessToken}`
+                    }
+                });
+
+                const data = await res.json();
+                setBooks(data);
+
+            } catch (error) {
+                console.error("Failed to fetch user books:", error.message);
+            }
+        };
+
+        if (user?.email) {
+            fetchUserBooks();
+        }
     }, [user]);
+
 
     const totalBooks = books.length;
 

@@ -4,6 +4,8 @@ import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
+import { getAuth } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const MyBooks = () => {
     const { user } = use(AuthContext);
@@ -20,24 +22,68 @@ const MyBooks = () => {
 
     // Fetch user's books
     useEffect(() => {
-        if (!user) return;
-        axios
-            .get(`http://localhost:3000/my-books?email=${user?.email}`)
-            .then(res => setBooks(res.data))
-            .catch(err => console.error(err));
+        const fetchBooks = async () => {
+            try {
+                const auth = getAuth();
+                const currentUser = auth.currentUser;
+
+                if (!currentUser) return;
+
+                //  Get Firebase ID token (JWT)
+                const accessToken = await currentUser.getIdToken();
+
+                const res = await axios.get(`http://localhost:3000/my-books?email=${user?.email}`, {
+                    headers: {
+                        authorization: `Bearer ${accessToken}`
+                    }
+                });
+                setBooks(res.data);
+            } catch (err) {
+                console.error('Error fetching books:', err);
+            }
+        };
+
+        fetchBooks();
     }, [user]);
 
     // Delete book handler
-    const handleDelete = (id) => {
-        if (!window.confirm('Are you sure you want to delete this book?')) return;
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        });
 
-        axios
-            .delete(`http://localhost:3000/books/${id}`)
-            .then(() => {
-                setBooks(books.filter(book => book._id !== id));
+        if (result.isConfirmed) {
+            try {
+                const auth = getAuth();
+                const currentUser = auth.currentUser;
+                const accessToken = await currentUser.getIdToken();
 
-            })
-            .catch(err => console.error(err));
+                await axios.delete(`http://localhost:3000/books/${id}`, {
+                    headers: {
+                        authorization: `Bearer ${accessToken}`
+                    }
+                });
+
+                setBooks(prevBooks => prevBooks.filter(book => book._id !== id));
+
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your book has been deleted.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            } catch (err) {
+                console.error(err);
+                Swal.fire('Error!', 'Something went wrong while deleting.', 'error');
+            }
+        }
     };
 
 
