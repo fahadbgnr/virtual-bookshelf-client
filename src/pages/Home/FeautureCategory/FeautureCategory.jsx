@@ -27,9 +27,13 @@ const FeautureCategory = () => {
                 const allBooks = res.data;
                 const categorySet = new Set(allBooks.map(book => book.bookCategory));
                 setCategories([...categorySet]);
+                
             })
             .catch(err => console.error(err));
+            
     }, []);
+    
+
     return (
         <section className="my-10 px-4 max-w-6xl mx-auto">
             <motion.h2

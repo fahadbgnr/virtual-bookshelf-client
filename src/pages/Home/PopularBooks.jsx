@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
+import Loder from '../LoadingPage/Loder';
 
 const PopularBooks = () => {
     const [books, setBooks] = useState([]);
@@ -14,6 +15,7 @@ const PopularBooks = () => {
                 setBooks(filteredBooks);
             })
             .catch(err => console.error(err));
+             
     }, []);
     return (
         <motion.section
