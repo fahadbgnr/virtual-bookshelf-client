@@ -22,7 +22,7 @@ const SocialLogIn = () => {
                     lastSignInTime: loggedUser.metadata.lastSignInTime
                 };
 
-                fetch('http://localhost:3000/users', {
+                fetch('https://virtual-bookshelf-server-woad.vercel.app/users', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(userData),

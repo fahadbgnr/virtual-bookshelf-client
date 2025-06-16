@@ -30,7 +30,7 @@ const BookDetails = () => {
 
     // 🔄 Load Reviews
     useEffect(() => {
-        axios.get(`http://localhost:3000/reviews/${_id}`).then((res) => {
+        axios.get(`https://virtual-bookshelf-server-woad.vercel.app/reviews/${_id}`).then((res) => {
             setReviews(res.data);
             const existing = res.data.find((r) => r.userEmail === user?.email);
             if (existing) {
@@ -48,7 +48,7 @@ const BookDetails = () => {
         if (!user) return Swal.fire('Please login to upvote');
         if (user.email === email) return Swal.fire('You cannot upvote your own book');
 
-        axios.post(`http://localhost:3000/booksUpvote/${_id}`, { userEmail: user.email })
+        axios.post(`https://virtual-bookshelf-server-woad.vercel.app/booksUpvote/${_id}`, { userEmail: user.email })
             .then((res) => {
                 if (res.data.success) {
                     setCurrentUpvotes(prev => prev + 1);
@@ -73,7 +73,7 @@ const BookDetails = () => {
         else if (updatedStatus === 'Reading') nextStatus = 'Read';
         else return Swal.fire('Already marked as Read');
 
-        axios.patch(`http://localhost:3000/books/${_id}/status`, { readingStatus: nextStatus })
+        axios.patch(`https://virtual-bookshelf-server-woad.vercel.app/books/${_id}/status`, { readingStatus: nextStatus })
             .then(res => {
                 if (res.data.success) {
                     setUpdatedStatus(nextStatus);
@@ -98,25 +98,25 @@ const BookDetails = () => {
         };
 
         const apiCall = editingReview
-            ? axios.put(`http://localhost:3000/reviews/${_id}`, reviewData)
-            : axios.post(`http://localhost:3000/reviews`, reviewData);
+            ? axios.put(`https://virtual-bookshelf-server-woad.vercel.app/reviews/${_id}`, reviewData)
+            : axios.post(`https://virtual-bookshelf-server-woad.vercel.app/reviews`, reviewData);
 
         apiCall.then((res) => {
             if (res.data.success) {
                 Swal.fire(editingReview ? 'Review updated' : 'Review posted');
                 setEditingReview(true);
                 setIsModalOpen(false);
-                axios.get(`http://localhost:3000/reviews/${_id}`).then((r) => setReviews(r.data));
+                axios.get(`https://virtual-bookshelf-server-woad.vercel.app/reviews/${_id}`).then((r) => setReviews(r.data));
             }
         });
     };
 
     // 🗑️ Delete Review
     const handleDeleteReview = () => {
-        axios.delete(`http://localhost:3000/reviews/${_id}`, { data: { userEmail: user.email } })
+        axios.delete(`https://virtual-bookshelf-server-woad.vercel.app/reviews/${_id}`, { data: { userEmail: user.email } })
             .then((res) => {
                 if (res.data.success) {
-                    axios.get(`http://localhost:3000/reviews/${_id}`).then((r) => setReviews(r.data));
+                    axios.get(`https://virtual-bookshelf-server-woad.vercel.app/reviews/${_id}`).then((r) => setReviews(r.data));
                     Swal.fire('Review deleted');
                     setUserReview('');
                     setEditingReview(false);

@@ -31,7 +31,7 @@ const AddBook = () => {
     try {
         const accessToken = await user.getIdToken(); //  Get Firebase JWT
 
-        const res = await fetch('http://localhost:3000/books', {
+        const res = await fetch('https://virtual-bookshelf-server-woad.vercel.app/books', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

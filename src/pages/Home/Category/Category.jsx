@@ -8,7 +8,7 @@ const Category = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/books`)
+        axios.get(`https://virtual-bookshelf-server-woad.vercel.app/books`)
             .then(res => {
                 const filtered = res.data.filter(
                     book => book.bookCategory === categoryName

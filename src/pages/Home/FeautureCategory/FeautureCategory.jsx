@@ -19,9 +19,10 @@ const colors = [
 
 const FeautureCategory = () => {
     const [categories, setCategories] = useState([]);
+    
 
     useEffect(() => {
-        axios.get('http://localhost:3000/books')
+        axios.get('https://virtual-bookshelf-server-woad.vercel.app/books')
             .then(res => {
                 const allBooks = res.data;
                 const categorySet = new Set(allBooks.map(book => book.bookCategory));

@@ -7,7 +7,7 @@ const PopularBooks = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/popularBooks')
+        axios.get('https://virtual-bookshelf-server-woad.vercel.app/popularBooks')
             .then(res => {
                 // Filter out books with no upvotes
                 const filteredBooks = res.data.filter(book => parseInt(book.upvote) > 0);

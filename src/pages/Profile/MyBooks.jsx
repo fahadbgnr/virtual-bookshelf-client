@@ -32,7 +32,7 @@ const MyBooks = () => {
                 //  Get Firebase ID token (JWT)
                 const accessToken = await currentUser.getIdToken();
 
-                const res = await axios.get(`http://localhost:3000/my-books?email=${user?.email}`, {
+                const res = await axios.get(`https://virtual-bookshelf-server-woad.vercel.app/my-books?email=${user?.email}`, {
                     headers: {
                         authorization: `Bearer ${accessToken}`
                     }
@@ -64,7 +64,7 @@ const MyBooks = () => {
                 const currentUser = auth.currentUser;
                 const accessToken = await currentUser.getIdToken();
 
-                await axios.delete(`http://localhost:3000/books/${id}`, {
+                await axios.delete(`https://virtual-bookshelf-server-woad.vercel.app/books/${id}`, {
                     headers: {
                         authorization: `Bearer ${accessToken}`
                     }

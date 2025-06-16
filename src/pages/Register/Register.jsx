@@ -41,7 +41,7 @@ const Register = () => {
                         lastSignInTime: user.metadata.lastSignInTime
                     };
 
-                    fetch('http://localhost:3000/users', {
+                    fetch('https://virtual-bookshelf-server-woad.vercel.app/users', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'

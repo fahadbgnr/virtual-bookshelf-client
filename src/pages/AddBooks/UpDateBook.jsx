@@ -21,7 +21,7 @@ const UpDateBook = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/books/${id}`)
+        fetch(`https://virtual-bookshelf-server-woad.vercel.app/books/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setUpDateBook(data);
@@ -45,7 +45,7 @@ const UpDateBook = () => {
         try {
             const accessToken = await user.getIdToken();
 
-            const res = await fetch(`http://localhost:3000/books/${id}`, {
+            const res = await fetch(`https://virtual-bookshelf-server-woad.vercel.app/books/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

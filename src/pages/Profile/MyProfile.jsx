@@ -22,7 +22,7 @@ const MyProfile = () => {
 
                 const accessToken = await currentUser.getIdToken();
 
-                const res = await fetch(`http://localhost:3000/my-books?email=${user?.email}`, {
+                const res = await fetch(`https://virtual-bookshelf-server-woad.vercel.app/my-books?email=${user?.email}`, {
                     headers: {
                         authorization: `Bearer ${accessToken}`
                     }

@@ -28,13 +28,13 @@ const router = createBrowserRouter([
             },
             {
                 path: 'bookShelf',
-                loader: () => fetch('http://localhost:3000/books'),
+                loader: () => fetch('https://virtual-bookshelf-server-woad.vercel.app/books'),
                 Component: BookShelf,
                 hydrateFallbackElement: <Loder></Loder>
             },
             {
                 path: 'bookDetails/:id',
-                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                loader: ({ params }) => fetch(`https://virtual-bookshelf-server-woad.vercel.app/books/${params.id}`),
                 Component: BookDetails,
                 hydrateFallbackElement: <Loder></Loder>
 
