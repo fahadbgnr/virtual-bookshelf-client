@@ -1,12 +1,53 @@
-# React + Vite
+# 📚 BookNest - Virtual Bookshelf
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌐 Live Site
+ 👉 [Visit BookNest]( https://virtual-bookshelf-25614.web.app)
 
-Currently, two official plugins are available:
+BookNest is a virtual bookshelf platform designed to help users manage, explore, and interact with a digital collection of books. It supports authentication, dynamic book views, user reviews, upvotes, and data visualization — all in an intuitive, responsive UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🎯 Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+BookNest allows users to:
+- Add and organize books with detailed information.
+- View and explore books added by others.
+- Interact through upvotes and reviews.
+- Analyze reading habits and category trends via charts.
+- Securely authenticate and manage personal profiles.
+
+---
+
+## 🚀 Key Features
+
+- 🔐 **Authentication:** Firebase-powered user signup, login, and social login.
+- 📖 **Book Management:** Add, update, and delete books with comprehensive metadata.
+- 🔍 **Book Details:** View book details including category, overview, and user info.
+- 👍 **Upvotes & Reviews:** Interact with books through upvotes and reviews.
+- 📊 **Analytics:** Recharts-powered visual stats for reading categories and status.
+- 🎨 **Modern UI:** Fully responsive UI with Tailwind CSS and animations via Framer Motion.
+- 🧠 **Form Handling:** React Hook Form for smooth form validation and submission.
+- ⚠️ **Sweet Alerts:** Enhanced UX with SweetAlert2 for notifications and confirmations.
+
+---
+
+## 📦 NPM Packages Used
+
+| Package              | Description                                      |
+|----------------------|--------------------------------------------------|
+| **@tailwindcss/vite** | Tailwind CSS integration with Vite              |
+| **axios**            | For handling API requests                        |
+| **firebase**         | User authentication and database integration     |
+| **framer-motion**    | Animation and motion effects                     |
+| **lottie-react**     | Lottie animation rendering                       |
+| **motion**           | Advanced animation library (framer-motion core) |
+| **react**            | React library                                    |
+| **react-dom**        | React DOM rendering                              |
+| **react-helmet**     | Manage document head (SEO & meta tags)           |
+| **react-hook-form**  | Hook-based form validation and control           |
+| **react-router**     | Declarative routing in React                     |
+| **recharts**         | Chart components for data visualization          |
+| **sweetalert2**      | Beautiful alert boxes and popups                 |
+| **tailwindcss**      | Utility-first CSS framework                      |
+
+---
