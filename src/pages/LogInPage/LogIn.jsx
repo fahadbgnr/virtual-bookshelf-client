@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 
 const LogIn = () => {
-    const { logInUser } = use(AuthContext);
+    const { logInUser , setLoading } = use(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state;
@@ -27,6 +27,8 @@ const LogIn = () => {
             .then(() => {
                 Swal.fire("Success", "Login successful", "success");
                 navigate(from, { replace: true });
+               setLoading(false)
+
 
             })
             .catch((error) => {
