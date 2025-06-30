@@ -4,13 +4,15 @@ import Footer from '../pages/Shared/Footer';
 import NavBar from '../pages/Shared/NavBar';
 
 const RootLayout = () => {
-    return (
-        <div>
-            <NavBar></NavBar>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
 export default RootLayout;

@@ -35,7 +35,7 @@ const FeautureCategory = () => {
     
 
     return (
-        <section className="my-10 px-4 max-w-6xl mx-auto">
+        <section className="my-32 px-4 max-w-7xl mx-auto">
             <motion.h2
                 className="text-3xl font-bold text-center mb-6"
                 initial={{ opacity: 0 }}

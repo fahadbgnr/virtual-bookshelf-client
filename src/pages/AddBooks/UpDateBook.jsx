@@ -70,7 +70,7 @@ const UpDateBook = () => {
 
     return (
         <motion.div
-            className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-10"
+            className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-24 mb-20"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

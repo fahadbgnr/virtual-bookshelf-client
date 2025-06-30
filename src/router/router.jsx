@@ -15,6 +15,8 @@ import MyProfile from "../pages/Profile/MyProfile";
 import PrivateRoute from "../routes/PrivateRoute";
 import Loder from "../pages/LoadingPage/Loder";
 import Category from "../pages/Home/Category/Category";
+import About from "../pages/About/About";
+import Contact from "../pages/Contact/Contact";
 
 
 const router = createBrowserRouter([
@@ -40,6 +42,16 @@ const router = createBrowserRouter([
 
             },
             {
+                path: 'about',
+                Component: About
+
+            },
+            {
+                path: 'contact',
+                Component: Contact
+                
+            },
+            {
                 path: 'addBook',
                 element: <PrivateRoute>
                     <AddBook></AddBook>
@@ -57,15 +69,15 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyBooks></MyBooks>
                 </PrivateRoute>
-                
-                
+
+
             },
             {
                 path: 'myProfile',
                 element: <PrivateRoute>
                     <MyProfile></MyProfile>
                 </PrivateRoute>
-                
+
             },
 
 
