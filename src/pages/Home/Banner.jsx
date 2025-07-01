@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from 'react-router'; 
 
 const Banner = () => {
+  const navigate = useNavigate(); 
+
   const slides = [
     {
       id: 1,
@@ -33,8 +36,14 @@ const Banner = () => {
     return () => clearTimeout(timer);
   }, [current]);
 
+  const handleExplore = () => {
+    navigate('/bookShelf');
+  };
+
   return (
-    <div className="relative w-full h-screen overflow-hidden rounded-lg shadow-lg select-none">
+    <div className="relative w-full rounded-lg shadow-lg select-none
+      h-[60vh] sm:h-[70vh] md:h-screen overflow-hidden"
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={slides[current].id}
@@ -50,13 +59,15 @@ const Banner = () => {
           <p className="text-base sm:text-lg md:text-xl mb-8 drop-shadow-md max-w-2xl">
             {slides[current].description}
           </p>
-          <button className="btn btn-primary btn-outline btn-lg">
+          <button
+            onClick={handleExplore}
+            className="btn btn-primary btn-outline btn-lg"
+          >
             Explore Now
           </button>
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Dots */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4 z-10">
         {slides.map((_, idx) => (
           <button

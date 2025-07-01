@@ -125,22 +125,20 @@ const BookDetails = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-4 my-16">
+        <div className="max-w-4xl mx-auto p-4 my-16 text-gray-900 dark:text-gray-100">
             <Helmet>
-                <title>BookNest||BookDetails</title>
+                <title>BookNest || BookDetails</title>
             </Helmet>
+
             <div className="grid md:grid-cols-2 gap-6">
-                <img src={coverPhotoUrl} alt={bookTitle} className="w-full rounded" />
+                <img src={coverPhotoUrl} alt={bookTitle} className="w-full rounded shadow" />
                 <div>
                     <h2 className="text-3xl font-bold pb-5">{bookTitle}</h2>
                     <p className="pb-2"><strong>Author:</strong> {authorName}</p>
                     <p className="pb-2"><strong>Total Pages:</strong> {totalPage}</p>
                     <p className="pb-2"><strong>Category:</strong> {bookCategory}</p>
-                    <p className="pb-2">
-                        <strong>Reading Status:</strong> {updatedStatus}
-                    </p>
+                    <p className="pb-2"><strong>Reading Status:</strong> {updatedStatus}</p>
 
-                    {/* 🔘 Status Button for Owner */}
                     {user?.email === email && updatedStatus !== 'Read' && (
                         <button
                             onClick={handleStatusUpdate}
@@ -163,13 +161,12 @@ const BookDetails = () => {
                 </div>
             </div>
 
-            {/* 📖 Reviews */}
             <div className="mt-10">
                 <h3 className="text-2xl font-semibold mb-4 flex justify-between items-center">
                     Reviews
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-600"
+                        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
                     >
                         {editingReview ? 'Edit Your Review' : 'Add Review'}
                     </button>
@@ -177,8 +174,8 @@ const BookDetails = () => {
 
                 <div className="space-y-3">
                     {reviews?.map((r, i) => (
-                        <div key={i} className="border p-3 rounded shadow-sm">
-                            <p className="text-sm text-gray-600 mb-1">
+                        <div key={i} className="border p-3 rounded shadow-sm bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
                                 {r.userName} ({r.userEmail})
                             </p>
                             <p>{r.review}</p>
@@ -187,10 +184,9 @@ const BookDetails = () => {
                 </div>
             </div>
 
-            {/* 📝 Review Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white rounded-lg w-full max-w-lg p-6 relative">
+                    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg w-full max-w-lg p-6 relative">
                         <h2 className="text-xl font-semibold mb-4">
                             {editingReview ? 'Edit Your Review' : 'Add a Review'}
                         </h2>
@@ -199,7 +195,7 @@ const BookDetails = () => {
                                 value={userReview}
                                 onChange={(e) => setUserReview(e.target.value)}
                                 placeholder="Write your review..."
-                                className="w-full p-3 border rounded resize-y"
+                                className="w-full p-3 border rounded resize-y dark:bg-gray-800 dark:border-gray-600"
                                 rows={6}
                                 required
                             />
@@ -207,7 +203,7 @@ const BookDetails = () => {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-4 py-2 rounded border border-gray-400 hover:bg-gray-100"
+                                    className="px-4 py-2 rounded border border-gray-400 hover:bg-gray-100 dark:border-gray-500 dark:hover:bg-gray-800"
                                 >
                                     Cancel
                                 </button>
