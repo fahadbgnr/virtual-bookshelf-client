@@ -41,7 +41,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative w-full rounded-lg shadow-lg select-none
+    <div className="relative w-full shadow-lg select-none
       h-[60vh] sm:h-[70vh] md:h-screen overflow-hidden"
     >
       <AnimatePresence mode="wait">

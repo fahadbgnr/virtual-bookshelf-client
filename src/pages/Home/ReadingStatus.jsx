@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const ReadingStatus = () => {
     return (
-       <section className="bg-gray-100 py-16 px-4 md:px-10 my-32">
+       <section className=" py-16 px-4 md:px-10 my-32">
       <h2 className="text-3xl font-bold text-center mb-12">
         📊 Your Reading Progress
       </h2>
