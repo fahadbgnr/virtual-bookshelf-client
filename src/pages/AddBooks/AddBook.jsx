@@ -74,7 +74,7 @@ const AddBook = () => {
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Book Title */}
                 <div>
-                    <label className="label font-semibold">Book Title</label>
+                    <label className="label font-semibold ">Book Title</label>
                     <input type="text" className="input input-bordered w-full" placeholder="Book Title" name="bookTitle" required />
                 </div>
 
