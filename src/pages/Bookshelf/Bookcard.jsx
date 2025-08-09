@@ -15,7 +15,7 @@ const Bookcard = ({ book }) => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden border hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
             >
                 <img
                     src={

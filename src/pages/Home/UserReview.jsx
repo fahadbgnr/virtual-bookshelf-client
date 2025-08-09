@@ -21,7 +21,7 @@ const UserReview = () => {
     ];
     return (
       <section className="my-32 px-4 md:px-10">
-      <h2 className="text-3xl font-bold mb-10 text-center">🗣️ What Readers Are Saying</h2>
+      <h2 className="text-3xl font-bold text-center mb-10 text-purple-700 dark:text-purple-400">🗣️ What Readers Are Saying</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {reviews.map((review, idx) => (
           <motion.div

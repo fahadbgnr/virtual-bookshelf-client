@@ -31,7 +31,7 @@ const Footer = () => {
                         <h6 className="footer-title font-bold mb-2">Social</h6>
                         <div className="flex gap-6 text-2xl">
                             <a
-                                href="https://github.com/fahadbgnr?tab=repositories"
+                                href="https://github.com/fahadbgnr"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-purple-600 transition"
@@ -40,7 +40,7 @@ const Footer = () => {
                                 <FaGithub />
                             </a>
                             <a
-                                href="https://www.linkedin.com/in/sheikh-fahad-956777357"
+                                href="https://www.linkedin.com/in/sheikhfahad01/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-purple-600 transition"
