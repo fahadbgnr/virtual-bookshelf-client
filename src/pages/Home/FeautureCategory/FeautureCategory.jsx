@@ -33,7 +33,6 @@ const FeautureCategory = () => {
             
     }, []);
     
-
     return (
         <section className="my-32 px-4 max-w-7xl mx-auto">
             <motion.h2
