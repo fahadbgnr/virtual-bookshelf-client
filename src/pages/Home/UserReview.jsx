@@ -18,6 +18,7 @@ const UserReview = () => {
             comment: "Would love more categories, but overall a great experience.",
             rating: 4,
         },
+        
     ];
     return (
       <section className="my-32 px-4 md:px-10">
